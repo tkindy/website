@@ -1,0 +1,57 @@
+==================================================================
+https://keybase.io/tkindy
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://tylerkindy.com
+  * I am tkindy (https://keybase.io/tkindy) on keybase.
+  * I have a public key ASA1gh3nKuiRXvl_ni2c1lopqLJbAdzrPXtyjZlsQIrhSAo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120ff8ca42c0c6a88970ea99548723cb4353ce1ba4155f90882955c17bb9bf20c500a",
+      "host": "keybase.io",
+      "kid": "012035821de72ae8915ef97f9e2d9cd65a29a8b25b01dceb3d7b728d996c408ae1480a",
+      "uid": "941cad24e2bcd70b4d49e0a467e68419",
+      "username": "tkindy"
+    },
+    "merkle_root": {
+      "ctime": 1544932437,
+      "hash": "4431fb9f8d82ed1875dda03239159e9f3905a8dc14c1bd0a36f0e9af78384a3bfe2f9e933faee9f5a507235fba3d850ee70ee795f58f4023b5a853394888201f",
+      "hash_meta": "242a768010489012a4cd3daaf9d7adbb69ea64a3b4159aa5074115ee8656098c",
+      "seqno": 4152058
+    },
+    "service": {
+      "entropy": "3hc2U7KYOhEellIVt3nhWSOz",
+      "hostname": "tylerkindy.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "2.11.0"
+  },
+  "ctime": 1544932457,
+  "expire_in": 504576000,
+  "prev": "c0edcee25ea75ad6e0922c48235f1ac238b3481c8e07c67c46ac12787196af6f",
+  "seqno": 19,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgNYId5yrokV75f54tnNZaKaiyWwHc6z17co2ZbECK4UgKp3BheWxvYWTESpcCE8QgwO3O4l6nWtbgkixII18awjizSByOB8Z8RqwSeHGWr2/EIHhiDjxFdvzbuevzPuq/C5ytmiO76FBeyiH8WYE+xEgVAgHCo3NpZ8RAF3BslAouCw5j4HQjSY+h8p3KaihW0qfBIKu54PfhIyuwmcjUZn+IgTk9bQh8RQEmiPu9ztTLKs5dSmme0Gh+CqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIG+U9d1G5MXazTgL6Jt8F4s00GvS30x/TXN2PIgrPFcoo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/tkindy
+
+==================================================================
+
