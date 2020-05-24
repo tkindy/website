@@ -64,6 +64,7 @@ nav {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
 }
 
 .home-container > * {
@@ -76,7 +77,9 @@ nav {
 }
 
 .me-description {
-  flex: 1;
+  flex-basis: 300px;
+  flex-grow: 1;
+  max-width: max-content;
 }
 
 .home-container h2 {
