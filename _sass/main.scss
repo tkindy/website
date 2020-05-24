@@ -25,7 +25,6 @@ nav {
   border-bottom-right-radius: 4px;
 }
 
-
 .name {
   color: white;
   width: max-content;
@@ -36,23 +35,23 @@ nav {
   margin: 5px 0;
 }
 
-.social-links img {
-  width: 32px;
-  height: 32px;
-}
-
 .pages, .social-links {
   width: max-content;
   margin: auto;
 }
 
 .pages {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .pages > a {
   margin: 0 3px;
   color: white;
+}
+
+.social-links img {
+  width: 32px;
+  height: 32px;
 }
 
 .social-links > a {
@@ -78,4 +77,9 @@ nav {
 
 .me-description {
   flex: 1;
+}
+
+.home-container h2 {
+  font-size: 2rem;
+  font-weight: 500;
 }
