@@ -1,7 +1,15 @@
 <nav>
+  <div class="name">
+    <h1>Tyler Kindy</h1>
+  </div>
+  <div class="pages">
   {% for item in site.data.nav %}
-    <a href="{{ item.link }}" {% if page.url == item.link %}class="current"{% endif %}>
-      {{ item.name }}
-    </a>
+    <a href="{{ item.link }}" {% if page.url == item.link %}class="current"{% endif %}>{{ item.name }}</a>
   {% endfor %}
+  </div>
+  <div class="social-links">
+    {% for item in site.data.social %}
+      <a href="{{ item.link }}"><img src="/assets/images/{{ item.image }}" alt="{{ item.name }}" /></a>
+    {% endfor %}
+  </div>
 </nav>

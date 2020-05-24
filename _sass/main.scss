@@ -1,3 +1,81 @@
-.current {
-  color: green;
+// General
+
+.container {
+  width: 75%;
+  margin: auto;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  color: rgb(33, 37, 41);
+}
+
+a {
+  color: rgb(0, 123, 255);
+  text-decoration-line: none;
+}
+
+// Navigation
+
+nav {
+  background-color: rgb(52, 58, 64);
+  padding: 5px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+
+.name {
+  color: white;
+  width: max-content;
+  margin: auto;
+}
+
+.name h1 {
+  margin: 5px 0;
+}
+
+.social-links img {
+  width: 32px;
+  height: 32px;
+}
+
+.pages, .social-links {
+  width: max-content;
+  margin: auto;
+}
+
+.pages {
+  margin-bottom: 5px;
+}
+
+.pages > a {
+  margin: 0 3px;
+  color: white;
+}
+
+.social-links > a {
+  margin: 0 3px;
+}
+
+// Home
+
+.home-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.home-container > * {
+  margin: 10px;
+}
+
+.me-img {
+  border-radius: 4px;
+  width: 300px;
+}
+
+.me-description {
+  flex: 1;
 }

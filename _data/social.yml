@@ -1,0 +1,6 @@
+- name: GitHub
+  image: github.png
+  link: https://github.com/tkindy
+- name: Twitter
+  image: twitter.svg
+  link: https://twitter.com/TylerKindy
