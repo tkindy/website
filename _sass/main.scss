@@ -16,6 +16,11 @@ a {
   text-decoration-line: none;
 }
 
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
 // Navigation
 
 nav {
@@ -28,11 +33,7 @@ nav {
 .name {
   color: white;
   width: max-content;
-  margin: auto;
-}
-
-.name h1 {
-  margin: 5px 0;
+  margin: 5px auto;
 }
 
 .pages, .social-links {
@@ -81,9 +82,4 @@ nav {
   flex-basis: 200px;
   flex-grow: 1;
   max-width: max-content;
-}
-
-.home-container h2 {
-  font-size: 2rem;
-  font-weight: 500;
 }
