@@ -10,10 +10,10 @@ defaults:
       layout: "default"
 
 plugins:
+  - jekyll-last-modified-at
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
-  - jekyll-last-modified-at
 
 title: Tyler Kindy
 tagline: My personal site
