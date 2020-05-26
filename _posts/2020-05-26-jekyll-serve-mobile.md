@@ -4,7 +4,7 @@ title: Testing a Jekyll site on mobile during development
 
 In my last post, I talked about a problem I'd had with flexbox on iOS. I'd only found the problem after I'd published my changes, and even though I'm not sure no one's visiting my website, I didn't like the idea of breaking the public version during testing.
 
-When I first found the problem, I tried recreating it on my laptop using mobile emulation in Firefox. However, the problem wasn't mainfesting there. I wanted to test out my site locally but on my phone.
+When I first found the problem, I tried recreating it on my laptop using mobile emulation in Firefox. However, the problem wasn't manifesting there. I wanted to test out my site locally but on my phone.
 
 Since I host my site on [GitHub Pages][1], I use [Jekyll][2], a static site generator, to... well, statically generate my site. During development, Jekyll will run a local webserver you can connect to to test out your local changes. Changing any file causes Jekyll to regenerate your site automatically.
 
@@ -18,7 +18,7 @@ First, I found my laptop's IP address
 
 This returned several addresses; the loopback address (`localhost`, `127.0.0.1`), several for my WiFi interface, and a couple for an interface named `docker0` which I'm assuming is somehow involved in Docker networking. As for the several for my WiFi interface, it was assigned one IPv4 address, and several IPv6 addresses with odd keywords after them that I don't really understand.
 
-Anyways, I took the WiFi IPv4 address while the Jekyll server as running and tried connecting to that from my phone.
+Anyways, I took the WiFi IPv4 address while the Jekyll server was running and tried connecting to that from my phone.
 
 {% include image.html file="jekyll-connection-refused.png" alt="connection refused" caption="Connection refused" class="tall" %}
 
