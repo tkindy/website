@@ -2,7 +2,7 @@
 title: Testing a Jekyll site on mobile during development
 ---
 
-In my last post, I talked about a problem I'd had with flexbox on iOS. I'd only found the problem after I'd published my changes, and even though I'm not sure no one's visiting my website, I didn't like the idea of breaking the public version during testing.
+In my last post, I talked about a problem I'd had with flexbox on iOS. I'd only found the problem after I'd published my changes, and even though I'm sure no one's visiting my website, I didn't like the idea of breaking the public version during testing.
 
 When I first found the problem, I tried recreating it on my laptop using mobile emulation in Firefox. However, the problem wasn't manifesting there. I wanted to test out my site locally but on my phone.
 
