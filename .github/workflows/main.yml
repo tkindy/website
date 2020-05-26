@@ -7,6 +7,8 @@ on:
 jobs:
   build-and-deploy:
       runs-on: ubuntu-latest
+      env:
+        gem-dir: vendor/bundle
       steps:
         - name: Checkout 🛎️
           uses: actions/checkout@v2
@@ -15,11 +17,22 @@ jobs:
 
         - name: Install Ruby
           uses: ruby/setup-ruby@v1
+          
+        - name: Use cached deps
+          uses: actions/cache@v1
+          with:
+            path: ${{ env.gem-dir }}
+            key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-gems-
 
-        - name: Install and Build 🔧
+        - name: Install deps
           run: |
-            bundle install
-            bundle exec jekyll build
+            bundle config path ${{ env.gem-dir }}
+            bundle install --jobs 4 --retry 3
+            
+        - name: Build
+          run: bundle exec jekyll build
 
         - name: Deploy 🚀
           uses: JamesIves/github-pages-deploy-action@releases/v3
