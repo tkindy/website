@@ -21,6 +21,40 @@ h2 {
   font-weight: 500;
 }
 
+figure.centered {
+  img, figcaption {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  figcaption {
+    text-align: center;
+    font-style: italic;
+    color: grey;
+  }
+}
+
+@media (min-width: 1000px) {
+  img.wide {
+    width: 50%;
+  }
+
+  img.tall {
+    width: 25%;
+  }
+}
+
+@media (max-width: 999px) {
+  img.wide {
+    width: 100%;
+  }
+
+  img.tall {
+    width: 100%
+  }
+}
+
 // Navigation
 
 nav {
