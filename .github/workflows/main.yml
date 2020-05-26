@@ -33,10 +33,3 @@ jobs:
             
         - name: Build
           run: bundle exec jekyll build
-
-        - name: Deploy 🚀
-          uses: JamesIves/github-pages-deploy-action@releases/v3
-          with:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            BRANCH: master
-            FOLDER: _site
