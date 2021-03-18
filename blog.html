@@ -1,69 +1,13 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Tyler Kindy" />
-  <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Blog | Tyler Kindy</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Blog" />
-<meta property="og:locale" content="en_US" />
-<meta property="og:site_name" content="Tyler Kindy" />
-<script type="application/ld+json">
-{"@type":"WebPage","dateModified":"2020-05-26T18:47:50+00:00","url":"/blog.html","headline":"Blog","@context":"https://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
-</head>
-
-<body>
-  <div class="container">
-    <nav>
-  <h1 class="name">Tyler Kindy</h1>
-
-  <div class="pages">
-  
-    <a href="/">Home</a>
-  
-    <a href="/blog.html">Blog</a>
-  
-  </div>
-  <div class="social-links">
-    
-      <a href="https://github.com/tkindy"><img src="/assets/images/github.png" alt="GitHub" /></a>
-    
-      <a href="https://twitter.com/TylerKindy"><img src="/assets/images/twitter.svg" alt="Twitter" /></a>
-    
-  </div>
-</nav>
-
-    <h2>Latest Posts</h2>
+---
+title: Blog
+---
+<h2>Latest Posts</h2>
 
 <ul>
-  
+  {% for post in site.posts %}
     <li>
-      <h3><a href="/2020/05/26/jekyll-serve-mobile.html">Testing a Jekyll site on mobile during development</a></h3>
-      <p>In my last post, I talked about a problem I’d had with flexbox on iOS. I’d only found the problem after I’d published my changes, and even though I’m sure no one’s visiting my website, I didn’t like the idea of breaking the public version during testing.</p>
-
-
+      <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+      {{ post.excerpt }}
     </li>
-  
-    <li>
-      <h3><a href="/2020/05/25/flexbox-ios.html">Trouble with flexbox on iOS</a></h3>
-      <p>In preparation for starting this blog, I decided to clean up my website a bit. The biggest housekeeping task was throwing out Bootstrap since I was really only using it for the grid layout. In its place, I decided to try out flexbox.</p>
-
-
-    </li>
-  
+  {% endfor %}
 </ul>
-
-  </div>
-</body>
-
-</html>
