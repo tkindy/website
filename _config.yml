@@ -19,6 +19,3 @@ title: Tyler Kindy
 tagline: My personal site
 
 permalink: /:categories/:year/:month/:day/:title
-
-include:
-  - _redirects
