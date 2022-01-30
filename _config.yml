@@ -17,6 +17,7 @@ plugins:
 
 title: Tyler Kindy
 tagline: My personal site
+url: https://tylerkindy.com
 
 permalink: /:categories/:year/:month/:day/:title
 
