@@ -4,7 +4,7 @@ on:
     branches:
       - master
 jobs:
-  "Build and Deploy PRs":
+  build-deploy-pr:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
