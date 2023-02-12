@@ -5,3 +5,6 @@ _site
 
 # Local Netlify folder
 .netlify
+
+# Clojure build
+output
