@@ -1,2 +1,3 @@
 [build]
-  command = "clojure --version"
+  command = "clojure -T:build build"
+  publish = "output"
