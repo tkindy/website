@@ -11,7 +11,8 @@
 (defn home []
   (list
    [:head
-    [:style (css {:pretty-print? false} [:body {:font-family "sans-serif"}])]]
+    [:style (css {:pretty-print? false}
+                 [:body {:font-family "sans-serif"}])]]
    [:body
     [:h1 "Tyler Kindy"]
     [:img {:src "/images/tyler.jpg"}]]))
