@@ -15,7 +15,9 @@
   (clean)
   (.mkdir (java.io.File. output-dir))
   (spit (str output-dir "/index.html")
-        (html5 {} (home))))
+        (html5 {} (home)))
+  (b/copy-dir {:src-dirs ["public"]
+               :target-dir output-dir}))
 
 (defn -main []
   (build))
