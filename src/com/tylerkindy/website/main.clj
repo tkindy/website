@@ -8,7 +8,9 @@
   (b/delete {:path output-dir}))
 
 (defn home []
-  [:body [:h1 "Hello, World!"]])
+  [:body
+   [:h1 "Hello, World!"]
+   [:h2 "Subheading"]])
 
 (defn build []
   (clean)
