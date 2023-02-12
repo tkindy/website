@@ -9,8 +9,7 @@
 
 (defn home []
   [:body
-   [:h1 "Hello, World!"]
-   [:h2 "Subheading"]])
+   [:h1 "Tyler Kindy"]])
 
 (defn build []
   (clean)
