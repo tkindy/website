@@ -1,4 +1,4 @@
-name: 'Build and Deploy PRs'
+name: "Build and Deploy PRs"
 on:
   pull_request:
     branches:
@@ -9,13 +9,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
+
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
           distribution: adopt
           java-version: 17
-        
+
       - name: Cache Clojure deps
         uses: actions/cache@v3.2.5
         with:
@@ -30,14 +30,14 @@ jobs:
         uses: DeLaGuardo/setup-clojure@05cb4bfdf57855f122e75b71e45224775cdfc4a0
         with:
           cli: 1.11.1.1224
-          
+
       - name: Build site
         run: clojure -M -m com.tylerkindy.website.main
-        
+
       - name: Deploy preview
         uses: nwtgck/actions-netlify@5da65c9f74c7961c5501a3ba329b8d0912f39c03
         with:
-          publish-dir: './output'
+          publish-dir: "./output"
           production-branch: master
           production-deploy: false
           github-token: ${{ secrets.GH_TOKEN }}
