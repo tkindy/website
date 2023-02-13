@@ -1,7 +1,9 @@
 (ns com.tylerkindy.website.blog
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [com.tylerkindy.website.output :refer [output page]]
+            [com.tylerkindy.website.templates :as t]))
 
 (defn extract-date [file]
   (let [name (.getName file)
@@ -23,3 +25,18 @@
                        .listFiles)
         posts (map parse-post post-files)]
     posts))
+
+(defn blog-listing [posts]
+  (t/default
+   "Blog"
+   (list
+    [:h2 "Latest Posts"]
+    [:ul
+     (for [{:keys [excerpt title url]} posts]
+       [:li
+        [:h3 [:a {:href url} title]]
+        excerpt])])))
+
+(defn build-blog-pages []
+  (let [posts (read-posts)]
+    (output "blog/index.html" (page (blog-listing posts)))))
