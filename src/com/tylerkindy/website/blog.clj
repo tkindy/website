@@ -31,7 +31,7 @@
 
 (defn blog-listing [posts]
   (t/default
-   "Blog"
+   "Blog | Tyler Kindy"
    (list
     [:h2 "Latest Posts"]
     [:ul
