@@ -1,4 +1,6 @@
-(ns com.tylerkindy.website.templates)
+(ns com.tylerkindy.website.templates
+  (:import [java.time.format DateTimeFormatter FormatStyle]
+           [java.util Locale]))
 
 (def nav-items [{:name "Home", :link "/"}
                 {:name "Blog", :link "/blog"}])
@@ -36,3 +38,15 @@
     [:div.container
      (nav)
      content]]))
+
+(def date-formatter (-> (DateTimeFormatter/ofLocalizedDate FormatStyle/MEDIUM)
+                        (.withLocale Locale/US)))
+(defn format-date [date]
+  (.format date date-formatter))
+
+(defn post [{:keys [title date content]}]
+  (default
+   (list
+    [:h1 title]
+    [:p [:i (format-date date)]]
+    content)))
