@@ -1,4 +1,4 @@
-// General
+/* General */
 
 .container {
   width: 75%;
@@ -21,18 +21,17 @@ h2 {
   font-weight: 500;
 }
 
-figure.centered {
-  img, figcaption {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
+figure.centered img,
+figure.centered figcaption {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  figcaption {
-    text-align: center;
-    font-style: italic;
-    color: grey;
-  }
+figure.centered figcaption {
+  text-align: center;
+  font-style: italic;
+  color: grey;
 }
 
 @media (min-width: 1000px) {
@@ -55,7 +54,7 @@ figure.centered {
   }
 }
 
-// Navigation
+/* Navigation */
 
 nav {
   background-color: rgb(52, 58, 64);
@@ -93,7 +92,7 @@ nav {
   margin: 0 3px;
 }
 
-// Home
+/* Home */
 
 .home-container {
   display: flex;
