@@ -5,13 +5,21 @@
             [com.tylerkindy.website.output :refer [output page]]
             [com.tylerkindy.website.templates :as t]))
 
-(defn extract-date [file]
+(defn parse-name [file]
   (let [name (.getName file)
         date (re-find #"\d{4}-\d{2}-\d{2}" name)]
-    (java.time.LocalDate/parse date)))
+    {:date (java.time.LocalDate/parse date)
+     :slug (subs name 11 (- (count name) 3))}))
+
+(def date-url-formatter
+  (java.time.format.DateTimeFormatter/ofPattern "/YYYY/MM/dd"))
+(defn build-url [date slug]
+  (str (.format date date-url-formatter)
+       "/"
+       slug))
 
 (defn parse-post [file]
-  (let [date (extract-date file)
+  (let [{:keys [date slug]} (parse-name file)
         reader (java.io.PushbackReader. (io/reader file))
         attributes (edn/read reader)
         content (-> reader
@@ -20,7 +28,8 @@
     (-> attributes
         (assoc :date date)
         (assoc :content content)
-        (assoc :excerpt (first (str/split content #"\n\n" 2))))))
+        (assoc :excerpt (first (str/split content #"\n\n" 2)))
+        (assoc :url (build-url date slug)))))
 
 (defn read-posts []
   (let [post-files (-> (io/file "_posts")
