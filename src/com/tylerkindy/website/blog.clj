@@ -23,6 +23,9 @@
 (defn read-posts []
   (let [post-files (-> (io/file "_posts")
                        .listFiles)
+        post-files (sort-by #(.getName %)
+                            (fn [x y] (compare y x))
+                            post-files)
         posts (map parse-post post-files)]
     posts))
 
