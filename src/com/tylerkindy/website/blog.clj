@@ -13,12 +13,14 @@
 (defn parse-post [file]
   (let [date (extract-date file)
         reader (java.io.PushbackReader. (io/reader file))
-        attributes (edn/read reader)]
+        attributes (edn/read reader)
+        content (-> reader
+                    slurp
+                    str/trim)]
     (-> attributes
         (assoc :date date)
-        (assoc :content (-> reader
-                            slurp
-                            str/trim)))))
+        (assoc :content content)
+        (assoc :excerpt (first (str/split content #"\n\n" 2))))))
 
 (defn read-posts []
   (let [post-files (-> (io/file "_posts")
