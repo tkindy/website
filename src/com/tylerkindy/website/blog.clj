@@ -55,4 +55,4 @@
   (let [posts (read-posts)]
     (output "blog/index.html" (page (blog-listing posts)))
     (doseq [{:keys [url content]} posts]
-      (output (subs url 1) content))))
+      (output (str (subs url 1) ".html") content))))
