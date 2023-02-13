@@ -1,5 +1,6 @@
 (ns com.tylerkindy.website.home
-  (:require [com.tylerkindy.website.templates :refer [default]]
+  (:require [com.tylerkindy.website.output :refer [output]]
+            [com.tylerkindy.website.templates :refer [default]]
             [hiccup.page :refer [html5]]))
 
 (defn home []
@@ -15,5 +16,5 @@
       "."]
      [:p "I have experience in back-end and Android development."]]]))
 
-(defn home-page []
-  (html5 {} (home)))
+(defn build-home-page []
+  (output "index.html" (html5 {} (home))))
