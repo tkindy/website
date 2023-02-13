@@ -1,6 +1,5 @@
 (ns com.tylerkindy.website.main
   (:require [clojure.tools.build.api :as b]
-            [garden.core :refer [css]]
             [hiccup.page :refer [html5]]))
 
 (def output-dir "output")
@@ -11,8 +10,7 @@
 (defn home []
   (list
    [:head
-    [:style (css {:pretty-print? false}
-                 [:body {:font-family "sans-serif"}])]]
+    [:link {:rel :stylesheet, :href "/css/main.css"}]]
    [:body
     [:h1 "Tyler Kindy"]
     [:img {:src "/images/tyler.jpg"}]]))
