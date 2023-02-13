@@ -1,6 +1,4 @@
----
-title: Trouble with flexbox on iOS
----
+{:title "Trouble with flexbox on iOS"}
 
 In preparation for starting this blog, I decided to clean up my website a bit. The biggest housekeeping task was throwing out Bootstrap since I was really only using it for the grid layout. In its place, I decided to try out flexbox.
 
