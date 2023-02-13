@@ -27,9 +27,10 @@
        [:img {:src (str "/images/" image)
               :alt name}]])]])
 
-(defn default [content]
+(defn default [title content]
   (list
    [:head
+    [:title title]
     [:meta {:charset :utf-8}]
     [:meta {:name :viewport, :content "width=device-width, initial-scale=1"}]
     [:link {:rel :stylesheet, :href "/css/main.css"}]
@@ -46,6 +47,7 @@
 
 (defn post [{:keys [title date content]}]
   (default
+   title
    (list
     [:h1 title]
     [:p [:i (format-date date)]]

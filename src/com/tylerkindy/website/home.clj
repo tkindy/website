@@ -4,6 +4,7 @@
 
 (defn home []
   (default
+   "Tyler Kindy"
    [:div.home-container
     [:img.me-img {:src "/images/tyler.jpg", :alt "Tyler"}]
     [:div.me-description
