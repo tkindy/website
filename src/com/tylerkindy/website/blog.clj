@@ -3,7 +3,8 @@
             [clojure.java.io :as io]
             [clojure.string :as str]
             [com.tylerkindy.website.output :refer [output-page]]
-            [com.tylerkindy.website.templates :as t]))
+            [com.tylerkindy.website.templates :as t]
+            [commonmark-hiccup.core :refer [markdown->hiccup]]))
 
 (defn parse-name [file]
   (let [name (.getName file)
@@ -27,7 +28,7 @@
                     str/trim)]
     (-> attributes
         (assoc :date date)
-        (assoc :content content)
+        (assoc :content (markdown->hiccup content))
         (assoc :excerpt (first (str/split content #"\n\n" 2)))
         (assoc :url (build-url date slug)))))
 
