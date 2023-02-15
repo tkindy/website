@@ -47,8 +47,8 @@
 
 (defn post [{:keys [title date content]}]
   (default
-   title
+   (str title " | Tyler Kindy")
    (list
-    [:h1 (str title " | Tyler Kindy")]
+    [:h1 title]
     [:p [:i (format-date date)]]
     content)))
