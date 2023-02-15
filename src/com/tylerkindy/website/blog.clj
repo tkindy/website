@@ -54,5 +54,6 @@
 (defn build-blog-pages []
   (let [posts (read-posts)]
     (output "blog/index.html" (page (blog-listing posts)))
-    (doseq [{:keys [url content]} posts]
-      (output (str (subs url 1) ".html") content))))
+    (doseq [{:keys [url] :as post} posts]
+      (output (str (subs url 1) ".html")
+              (page (t/post post))))))
