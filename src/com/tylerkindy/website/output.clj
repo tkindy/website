@@ -15,3 +15,6 @@
         .toFile
         .mkdirs)
     (spit (.toFile path) contents)))
+
+(defn output-page [path contents]
+  (output path (page contents)))

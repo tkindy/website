@@ -2,7 +2,7 @@
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [com.tylerkindy.website.output :refer [output page]]
+            [com.tylerkindy.website.output :refer [output-page]]
             [com.tylerkindy.website.templates :as t]))
 
 (defn parse-name [file]
@@ -53,7 +53,7 @@
 
 (defn build-blog-pages []
   (let [posts (read-posts)]
-    (output "blog/index.html" (page (blog-listing posts)))
+    (output-page "blog/index.html" (blog-listing posts))
     (doseq [{:keys [url] :as post} posts]
-      (output (str (subs url 1) ".html")
-              (page (t/post post))))))
+      (output-page (str (subs url 1) ".html")
+                   (t/post post)))))

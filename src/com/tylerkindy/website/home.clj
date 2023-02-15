@@ -1,5 +1,5 @@
 (ns com.tylerkindy.website.home
-  (:require [com.tylerkindy.website.output :refer [output page]]
+  (:require [com.tylerkindy.website.output :refer [output-page]]
             [com.tylerkindy.website.templates :refer [default]]))
 
 (defn home []
@@ -16,4 +16,4 @@
      [:p "I have experience in back-end and Android development."]]]))
 
 (defn build-home-page []
-  (output "index.html" (page (home))))
+  (output-page "index.html" (home)))
