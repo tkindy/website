@@ -49,6 +49,6 @@
   (default
    title
    (list
-    [:h1 title]
+    [:h1 (str title " | Tyler Kindy")]
     [:p [:i (format-date date)]]
     content)))
