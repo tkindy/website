@@ -2,9 +2,9 @@
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.string :as str]
+            [com.tylerkindy.website.mdj :refer [parse-markdown]]
             [com.tylerkindy.website.output :refer [output-page]]
-            [com.tylerkindy.website.templates :as t]
-            [commonmark-hiccup.core :refer [markdown->hiccup]]))
+            [com.tylerkindy.website.templates :as t]))
 
 (defn parse-name [file]
   (let [name (.getName file)
@@ -28,7 +28,7 @@
                     str/trim)]
     (-> attributes
         (assoc :date date)
-        (assoc :content (markdown->hiccup content))
+        (assoc :content (parse-markdown content))
         (assoc :excerpt (first (str/split content #"\n\n" 2)))
         (assoc :url (build-url date slug)))))
 
