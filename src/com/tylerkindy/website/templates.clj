@@ -40,7 +40,9 @@
     [:meta {:name :viewport, :content "width=device-width, initial-scale=1"}]
     [:link {:rel :stylesheet, :href "/assets/css/main.css"}]
     [:link {:rel :icon, :href "/favicon.ico", :type "image/x-icon"}]
-    [:link {:rel :alternate, :href (str "/" feed-path), :type "application/atom+xml"}]]
+    [:link {:rel :alternate, :href (str "/" feed-path), :type "application/atom+xml"}]
+    [:meta {:property :og:title, :content title}]
+    [:meta {:property :og:locale, :content :en_US}]]
    [:body
     [:div.container
      (nav)
