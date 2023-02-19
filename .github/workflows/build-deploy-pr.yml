@@ -32,7 +32,7 @@ jobs:
           cli: 1.11.1.1224
 
       - name: Build site
-        run: clojure -M -m com.tylerkindy.website.main
+        run: clojure -X:build :env :preview
 
       - name: Deploy preview
         uses: nwtgck/actions-netlify@5da65c9f74c7961c5501a3ba329b8d0912f39c03
