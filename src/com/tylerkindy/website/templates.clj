@@ -9,9 +9,6 @@
 (def social-links [{:name "GitHub"
                     :image "github.png"
                     :link "https://github.com/tkindy"}
-                   {:name "Twitter"
-                    :image "twitter.svg"
-                    :link "https://twitter.com/TylerKindy"}
                    {:name "Mastodon"
                     :image "mastodon.svg"
                     :link "https://mastodon.social/@TylerKindy"
