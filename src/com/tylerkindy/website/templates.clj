@@ -28,12 +28,13 @@
        [:img {:src (str "/assets/images/" image)
               :alt name}]])]])
 
+(def gtag (slurp (io/resource "gtag.html")))
+
 (defn default [{:keys [env]} title content]
   (list
    [:head
     [:title title]
-    (when (= env :production)
-      (slurp (io/resource "gtag.html")))
+    (when (= env :production) gtag)
     [:meta {:charset :utf-8}]
     [:meta {:name :viewport, :content "width=device-width, initial-scale=1"}]
     [:link {:rel :stylesheet, :href "/assets/css/main.css"}]
