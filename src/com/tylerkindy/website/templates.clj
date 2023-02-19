@@ -1,5 +1,6 @@
 (ns com.tylerkindy.website.templates
-  (:require [clojure.java.io :as io])
+  (:require [clojure.java.io :as io]
+            [com.tylerkindy.website.feed :refer [feed-path]])
   (:import [java.time.format DateTimeFormatter FormatStyle]
            [java.util Locale]))
 
@@ -38,7 +39,8 @@
     [:meta {:charset :utf-8}]
     [:meta {:name :viewport, :content "width=device-width, initial-scale=1"}]
     [:link {:rel :stylesheet, :href "/assets/css/main.css"}]
-    [:link {:rel :icon, :href "/favicon.ico", :type "image/x-icon"}]]
+    [:link {:rel :icon, :href "/favicon.ico", :type "image/x-icon"}]
+    [:link {:rel :alternate, :href (str "/" feed-path), :type "application/atom+xml"}]]
    [:body
     [:div.container
      (nav)
