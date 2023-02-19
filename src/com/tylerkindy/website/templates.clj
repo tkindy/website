@@ -24,7 +24,7 @@
    [:div.social-links
     (for [{:keys [rel link image name]} social-links]
       [:a {:rel rel, :href link}
-       [:img {:src (str "/images/" image)
+       [:img {:src (str "/assets/images/" image)
               :alt name}]])]])
 
 (defn default [title content]
@@ -33,7 +33,7 @@
     [:title title]
     [:meta {:charset :utf-8}]
     [:meta {:name :viewport, :content "width=device-width, initial-scale=1"}]
-    [:link {:rel :stylesheet, :href "/css/main.css"}]
+    [:link {:rel :stylesheet, :href "/assets/css/main.css"}]
     [:link {:rel :icon, :href "/favicon.ico", :type "image/x-icon"}]]
    [:body
     [:div.container

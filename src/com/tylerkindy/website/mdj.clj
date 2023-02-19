@@ -6,7 +6,7 @@
 (defn image [{:keys [file alt class caption]}]
   (html
    [:figure.centered
-    [:img {:src (str "/images/" file)
+    [:img {:src (str "/assets/images/" file)
            :alt alt
            :class class}]
     [:figcaption caption]]))
