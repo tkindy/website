@@ -33,22 +33,24 @@
 (def gtag (slurp (io/resource "gtag.html")))
 
 (defn default [{:keys [env]} path title content]
-  (list
-   [:head
-    [:title title]
-    (when (= env :production) gtag)
-    [:meta {:charset :utf-8}]
-    [:meta {:name :viewport, :content "width=device-width, initial-scale=1"}]
-    [:link {:rel :stylesheet, :href "/assets/css/main.css"}]
-    [:link {:rel :icon, :href "/favicon.ico", :type "image/x-icon"}]
-    [:link {:rel :alternate, :href (str "/" feed-path), :type "application/atom+xml"}]
-    [:meta {:property :og:title, :content title}]
-    [:meta {:property :og:locale, :content :en_US}]
-    [:link {:rel :canonical, :href (absolute-url path)}]]
-   [:body
-    [:div.container
-     (nav)
-     content]]))
+  (let [url (absolute-url path)]
+    (list
+     [:head
+      [:title title]
+      (when (= env :production) gtag)
+      [:meta {:charset :utf-8}]
+      [:meta {:name :viewport, :content "width=device-width, initial-scale=1"}]
+      [:link {:rel :stylesheet, :href "/assets/css/main.css"}]
+      [:link {:rel :icon, :href "/favicon.ico", :type "image/x-icon"}]
+      [:link {:rel :alternate, :href (str "/" feed-path), :type "application/atom+xml"}]
+      [:meta {:property :og:title, :content title}]
+      [:meta {:property :og:locale, :content :en_US}]
+      [:link {:rel :canonical, :href url}]
+      [:meta {:property :og:url, :content url}]]
+     [:body
+      [:div.container
+       (nav)
+       content]])))
 
 (def date-formatter (-> (DateTimeFormatter/ofLocalizedDate FormatStyle/MEDIUM)
                         (.withLocale Locale/US)))
