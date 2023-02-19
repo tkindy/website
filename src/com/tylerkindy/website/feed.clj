@@ -1,7 +1,9 @@
 (ns com.tylerkindy.website.feed
   (:require [clojure.data.xml :as xml]
             [com.tylerkindy.website.output :refer [output]]
-            [com.tylerkindy.website.url :refer [absolute-url]]))
+            [com.tylerkindy.website.url :refer [absolute-url]]
+            [hiccup.core :refer [html]]
+            [hiccup.util :refer [escape-html]]))
 
 (def feed-path "feed.xml")
 
@@ -11,7 +13,14 @@
      [:title {:type "html"} title]
      [:link {:href url :rel "alternate" :type "text/html" :title title}]
      [:published (.atStartOfDay date java.time.ZoneOffset/UTC)]
-     [:updated last-modified]]))
+     [:updated last-modified]
+     [:id url]
+     [:content {:type "html" :xml:base url} (-> content
+                                                html
+                                                escape-html)]
+     [:author
+      [:name "Tyler Kindy"]]
+     [:summary {:type "html"} excerpt]]))
 
 (defn feed [posts]
   (xml/sexp-as-element
