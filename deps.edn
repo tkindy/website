@@ -2,4 +2,9 @@
  {commonmark-hiccup/commonmark-hiccup {:mvn/version "0.3.0"}
   garden/garden {:mvn/version "1.3.10"}
   hiccup/hiccup {:mvn/version "1.0.5"}
-  io.github.clojure/tools.build {:git/tag "v0.9.3", :git/sha "e537cd1"}}}
+  io.github.clojure/tools.build {:git/tag "v0.9.3", :git/sha "e537cd1"}}
+
+ :aliases
+ {:build
+  {:exec-fn com.tylerkindy.website.main/build
+   :exec-args {:env :local}}}}
