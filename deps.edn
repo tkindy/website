@@ -4,7 +4,8 @@
  {commonmark-hiccup/commonmark-hiccup {:mvn/version "0.3.0"}
   garden/garden {:mvn/version "1.3.10"}
   hiccup/hiccup {:mvn/version "1.0.5"}
-  io.github.clojure/tools.build {:git/tag "v0.9.3", :git/sha "e537cd1"}}
+  io.github.clojure/tools.build {:git/tag "v0.9.3", :git/sha "e537cd1"}
+  org.clojure/data.xml {:mvn/version "0.0.8"}}
 
  :aliases
  {:build
