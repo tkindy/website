@@ -2,7 +2,7 @@
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [com.tylerkindy.website.mdj :refer [parse-markdown]]
+            [com.tylerkindy.website.mdj :refer [mdj->hiccup]]
             [com.tylerkindy.website.output :refer [output-page]]
             [com.tylerkindy.website.templates :as t]))
 
@@ -28,7 +28,7 @@
                     str/trim)]
     (-> attributes
         (assoc :date date)
-        (assoc :content (parse-markdown content))
+        (assoc :content (mdj->hiccup content))
         (assoc :excerpt (first (str/split content #"\n\n" 2)))
         (assoc :url (build-url date slug)))))
 
