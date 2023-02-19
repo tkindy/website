@@ -23,8 +23,6 @@
 (defn feed [posts]
   (xml/sexp-as-element
    [:feed {:xmlns "http://www.w3.org/2005/Atom"}
-    [:generator {:uri "https://github.com/tkindy/website"}
-     "Tyler Kindy's static site generator"]
     [:link {:href (absolute-url (str "/" feed-path))
             :rel "self"
             :type "application/atom+xml"}]
