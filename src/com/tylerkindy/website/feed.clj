@@ -5,6 +5,13 @@
 
 (def feed-path "feed.xml")
 
+(defn entry [{:keys [url title date content excerpt]}]
+  (let [url (absolute-url url)]
+    [:entry
+     [:title {:type "html"} title]
+     [:link {:href url :rel "alternate" :type "text/html" :title title}]
+     [:published (.atStartOfDay date java.time.ZoneOffset/UTC)]]))
+
 (defn feed [posts]
   (xml/sexp-as-element
    [:feed {:xmlns "http://www.w3.org/2005/Atom"}
@@ -19,7 +26,9 @@
     [:updated (-> (java.time.Instant/now)
                   (.truncatedTo java.time.temporal.ChronoUnit/SECONDS))]
     [:id (absolute-url (str "/" feed-path))]
-    [:title {:type "html"} "Tyler Kindy"]]))
+    [:title {:type "html"} "Tyler Kindy"]
+
+    (map entry posts)]))
 
 (defn build-feed [posts]
   (output feed-path
