@@ -1,0 +1,3 @@
+[build]
+  command = "echo 'Skipping build'"
+  publish = "output"
