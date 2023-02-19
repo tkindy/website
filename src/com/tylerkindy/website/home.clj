@@ -2,8 +2,9 @@
   (:require [com.tylerkindy.website.output :refer [output-page]]
             [com.tylerkindy.website.templates :refer [default]]))
 
-(defn home []
+(defn home [config]
   (default
+    config
    "Tyler Kindy"
    [:div.home-container
     [:img.me-img {:src "/assets/images/tyler.jpg", :alt "Tyler"}]
@@ -15,5 +16,5 @@
       "."]
      [:p "I have experience in back-end and Android development."]]]))
 
-(defn build-home-page []
-  (output-page "index.html" (home)))
+(defn build-home-page [config]
+  (output-page "index.html" (home config)))

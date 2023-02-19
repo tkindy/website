@@ -1,4 +1,6 @@
-{:deps
+{:paths ["src" "resources"]
+
+ :deps
  {commonmark-hiccup/commonmark-hiccup {:mvn/version "0.3.0"}
   garden/garden {:mvn/version "1.3.10"}
   hiccup/hiccup {:mvn/version "1.0.5"}

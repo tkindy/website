@@ -41,8 +41,9 @@
         posts (map parse-post post-files)]
     posts))
 
-(defn blog-listing [posts]
+(defn blog-listing [config posts]
   (t/default
+   config
    "Blog | Tyler Kindy"
    (list
     [:h2 "Latest Posts"]
@@ -52,9 +53,9 @@
         [:h3 [:a {:href url} title]]
         excerpt])])))
 
-(defn build-blog-pages []
+(defn build-blog-pages [config]
   (let [posts (read-posts)]
-    (output-page "blog/index.html" (blog-listing posts))
+    (output-page "blog/index.html" (blog-listing config posts))
     (doseq [{:keys [url] :as post} posts]
       (output-page (str (subs url 1) ".html")
-                   (t/post post)))))
+                   (t/post config post)))))

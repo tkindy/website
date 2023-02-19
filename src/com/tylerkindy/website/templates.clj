@@ -1,4 +1,5 @@
 (ns com.tylerkindy.website.templates
+  (:require [clojure.java.io :as io])
   (:import [java.time.format DateTimeFormatter FormatStyle]
            [java.util Locale]))
 
@@ -27,10 +28,12 @@
        [:img {:src (str "/assets/images/" image)
               :alt name}]])]])
 
-(defn default [title content]
+(defn default [{:keys [env]} title content]
   (list
    [:head
     [:title title]
+    (when (= env :production)
+      (slurp (io/resource "gtag.html")))
     [:meta {:charset :utf-8}]
     [:meta {:name :viewport, :content "width=device-width, initial-scale=1"}]
     [:link {:rel :stylesheet, :href "/assets/css/main.css"}]
@@ -45,8 +48,9 @@
 (defn format-date [date]
   (.format date date-formatter))
 
-(defn post [{:keys [title date content]}]
+(defn post [config {:keys [title date content]}]
   (default
+   config
    (str title " | Tyler Kindy")
    (list
     [:h1 title]

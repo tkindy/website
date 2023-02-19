@@ -10,7 +10,7 @@
 (defn build [config]
   (clean)
   (.mkdir (java.io.File. output-dir))
-  (build-home-page)
-  (build-blog-pages)
+  (build-home-page config)
+  (build-blog-pages config)
   (b/copy-dir {:src-dirs ["public"]
                :target-dir output-dir}))
