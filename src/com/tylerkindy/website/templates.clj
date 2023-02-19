@@ -1,6 +1,7 @@
 (ns com.tylerkindy.website.templates
   (:require [clojure.java.io :as io]
-            [com.tylerkindy.website.feed :refer [feed-path]])
+            [com.tylerkindy.website.feed :refer [feed-path]]
+            [com.tylerkindy.website.url :refer [absolute-url]])
   (:import [java.time.format DateTimeFormatter FormatStyle]
            [java.util Locale]))
 
@@ -31,7 +32,7 @@
 
 (def gtag (slurp (io/resource "gtag.html")))
 
-(defn default [{:keys [env]} title content]
+(defn default [{:keys [env]} path title content]
   (list
    [:head
     [:title title]
@@ -42,7 +43,8 @@
     [:link {:rel :icon, :href "/favicon.ico", :type "image/x-icon"}]
     [:link {:rel :alternate, :href (str "/" feed-path), :type "application/atom+xml"}]
     [:meta {:property :og:title, :content title}]
-    [:meta {:property :og:locale, :content :en_US}]]
+    [:meta {:property :og:locale, :content :en_US}]
+    [:link {:rel :canonical, :href (absolute-url path)}]]
    [:body
     [:div.container
      (nav)
@@ -53,9 +55,10 @@
 (defn format-date [date]
   (.format date date-formatter))
 
-(defn post [config {:keys [title date content]}]
+(defn post [config url {:keys [title date content]}]
   (default
    config
+   url
    (str title " | Tyler Kindy")
    (list
     [:h1 title]

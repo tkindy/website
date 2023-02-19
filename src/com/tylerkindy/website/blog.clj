@@ -52,6 +52,7 @@
 (defn blog-listing [config posts]
   (t/default
    config
+   "/blog"
    "Blog | Tyler Kindy"
    (list
     [:h2 "Latest Posts"]
@@ -66,5 +67,5 @@
     (output-page "blog/index.html" (blog-listing config posts))
     (doseq [{:keys [url] :as post} posts]
       (output-page (str (subs url 1) ".html")
-                   (t/post config post)))
+                   (t/post config url post)))
     (build-feed posts)))

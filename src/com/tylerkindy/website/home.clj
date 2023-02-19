@@ -4,7 +4,8 @@
 
 (defn home [config]
   (default
-    config
+   config
+   "/"
    "Tyler Kindy"
    [:div.home-container
     [:img.me-img {:src "/assets/images/tyler.jpg", :alt "Tyler"}]
