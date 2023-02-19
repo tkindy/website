@@ -5,12 +5,13 @@
 
 (def feed-path "feed.xml")
 
-(defn entry [{:keys [url title date content excerpt]}]
+(defn entry [{:keys [url title date last-modified content excerpt]}]
   (let [url (absolute-url url)]
     [:entry
      [:title {:type "html"} title]
      [:link {:href url :rel "alternate" :type "text/html" :title title}]
-     [:published (.atStartOfDay date java.time.ZoneOffset/UTC)]]))
+     [:published (.atStartOfDay date java.time.ZoneOffset/UTC)]
+     [:updated last-modified]]))
 
 (defn feed [posts]
   (xml/sexp-as-element

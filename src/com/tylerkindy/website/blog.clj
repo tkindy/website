@@ -20,6 +20,12 @@
        "/"
        slug))
 
+(defn last-modified [file]
+  (-> file
+      .lastModified
+      java.time.Instant/ofEpochMilli
+      (.truncatedTo java.time.temporal.ChronoUnit/SECONDS)))
+
 (defn parse-post [file]
   (let [{:keys [date slug]} (parse-name file)
         reader (java.io.PushbackReader. (io/reader file))
@@ -31,7 +37,8 @@
         (assoc :date date)
         (assoc :content (mdj->hiccup content))
         (assoc :excerpt (first (str/split content #"\n\n" 2)))
-        (assoc :url (build-url date slug)))))
+        (assoc :url (build-url date slug))
+        (assoc :last-modified (last-modified file)))))
 
 (defn read-posts []
   (let [post-files (-> (io/file "_posts")
