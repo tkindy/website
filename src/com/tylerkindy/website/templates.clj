@@ -1,6 +1,5 @@
 (ns com.tylerkindy.website.templates
-  (:require [clojure.java.io :as io]
-            [com.tylerkindy.website.feed :refer [feed-path]]
+  (:require [com.tylerkindy.website.feed :refer [feed-path]]
             [com.tylerkindy.website.url :refer [absolute-url]])
   (:import [java.time.format DateTimeFormatter FormatStyle]
            [java.util Locale]))
@@ -30,14 +29,11 @@
        [:img {:src (str "/assets/images/" image)
               :alt name}]])]])
 
-(def gtag (slurp (io/resource "gtag.html")))
-
-(defn default [{:keys [env]} path title content]
+(defn default [_ path title content]
   (let [url (absolute-url path)]
     (list
      [:head
       [:title title]
-      (when (= env :production) gtag)
       [:meta {:charset :utf-8}]
       [:meta {:name :viewport, :content "width=device-width, initial-scale=1"}]
       [:link {:rel :stylesheet, :href "/assets/css/main.css"}]
