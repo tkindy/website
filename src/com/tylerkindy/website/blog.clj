@@ -2,6 +2,7 @@
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.string :as str]
+            [com.tylerkindy.website.feed :refer [build-feed]]
             [com.tylerkindy.website.mdj :refer [mdj->hiccup]]
             [com.tylerkindy.website.output :refer [output-page]]
             [com.tylerkindy.website.templates :as t]))
@@ -58,4 +59,5 @@
     (output-page "blog/index.html" (blog-listing config posts))
     (doseq [{:keys [url] :as post} posts]
       (output-page (str (subs url 1) ".html")
-                   (t/post config post)))))
+                   (t/post config post)))
+    (build-feed posts)))
