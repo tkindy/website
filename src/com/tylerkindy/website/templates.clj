@@ -46,7 +46,8 @@
       [:meta {:property :og:title, :content title}]
       [:meta {:property :og:locale, :content :en_US}]
       [:link {:rel :canonical, :href url}]
-      [:meta {:property :og:url, :content url}]]
+      [:meta {:property :og:url, :content url}]
+      [:meta {:property :og:site_name, :content "Tyler Kindy"}]]
      [:body
       [:div.container
        (nav)
