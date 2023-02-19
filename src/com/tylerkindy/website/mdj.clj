@@ -14,11 +14,13 @@
 (defn mdj->markdown [mdj]
   (str/replace mdj
                #"%\(.*?\)"
-               #(-> %1
-                    (subs 1)
-                    read-string
-                    eval
-                    str)))
+               (fn [expr]
+                 (let [expr (-> expr
+                                (subs 1)
+                                read-string)]
+                   (-> (binding [*ns* (find-ns 'com.tylerkindy.website.mdj)]
+                         (eval expr))
+                       str)))))
 
 (defn mdj->hiccup [mdj]
   (-> mdj
