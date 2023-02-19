@@ -68,4 +68,7 @@
     (doseq [{:keys [url] :as post} posts]
       (output-page (str (subs url 1) ".html")
                    (t/post config url post)))
-    (build-feed posts)))
+    (build-feed posts)
+
+    (cons {:url "blog", :last-modified (java.time.Instant/now)}
+          posts)))
