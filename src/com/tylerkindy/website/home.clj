@@ -15,7 +15,9 @@
       "I'm a Boston-based software engineer working at "
       [:a {:href "https://www.hubspot.com/"} "HubSpot"]
       "."]
-     [:p "I have experience in back-end and Android development."]]]))
+     [:p
+      "My primary work experience is in backend web development. Through side projects,
+       I also have experience with frontend web development, primarily with React."]]]))
 
 (defn build-home-page [config]
   (output-page "index.html" (home config)))
