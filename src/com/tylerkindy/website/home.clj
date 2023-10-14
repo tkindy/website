@@ -8,7 +8,9 @@
    "/"
    "Tyler Kindy"
    [:div.home-container
-    [:img.me-img {:src "/assets/images/tyler.jpg", :alt "Tyler"}]
+    [:picture
+     [:source {:srcset "/assets/images/tyler.webp", :type "image/webp"}]
+     [:img.me-img {:src "/assets/images/tyler.jpg", :alt "Tyler"}]]
     [:div.me-description
      [:h2 "Hi! I'm Tyler."]
      [:p
