@@ -11,10 +11,7 @@
     [:img.me-img {:src "/assets/images/tyler.jpg", :alt "Tyler"}]
     [:div.me-description
      [:h2 "Hi! I'm Tyler."]
-     [:p
-      "I'm a Boston-based software engineer working at "
-      [:a {:href "https://www.hubspot.com/"} "HubSpot"]
-      "."]
+     [:p "I'm a Boston-based software engineer."]
      [:p
       "My primary work experience is in backend web development. Through side projects,
        I also have experience with frontend web development, primarily with React."]]]))
