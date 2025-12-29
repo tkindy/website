@@ -11,7 +11,10 @@
     [:img.me-img {:src "/assets/images/tyler.jpg", :alt "Tyler"}]
     [:div.me-description
      [:h2 "Hi! I'm Tyler."]
-     [:p "I'm a Boston-based software engineer."]
+     [:p
+      "I'm a software engineer at "
+      [:a {:href "https://ambrook.com/"} "Ambrook"]
+      "."]
      [:p
       "My primary work experience is in backend web development. Through side projects,
        I also have experience with frontend web development, primarily with React."]]]))
