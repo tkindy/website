@@ -1,5 +1,11 @@
-# Local Netlify folder
-.netlify
+# build output
+dist/
 
-# Clojure build
-output
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# pagefind
+public/pagefind/
