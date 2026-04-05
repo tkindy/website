@@ -1,7 +1,8 @@
 {
-  "name": "tylerkindy-website",
+  "name": "tylerkindy.com",
   "type": "module",
-  "version": "5.5.1",
+  "version": "2.0.0",
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
@@ -28,7 +29,11 @@
     "tailwindcss": "^4.1.18"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "workerd"
+    ]
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
@@ -45,6 +50,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.51.0"
+    "typescript-eslint": "^8.51.0",
+    "wrangler": "^4.80.0"
   }
 }

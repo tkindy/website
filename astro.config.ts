@@ -14,6 +14,11 @@ import { SITE } from "./src/config";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
+  redirects: {
+    "/2020/05/25/flexbox-ios": "/posts/flexbox-ios",
+    "/2020/05/26/jekyll-serve-mobile": "/posts/jekyll-serve-mobile",
+    "/feed.xml": "/rss.xml",
+  },
   integrations: [
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
