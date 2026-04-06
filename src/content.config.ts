@@ -1,6 +1,16 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import { SITE } from "@/config";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+const datetimeInSiteTimezone = z
+  .date()
+  .transform((val) => dayjs(val).utc().tz(SITE.timezone, true).toDate());
 
 export const BLOG_PATH = "src/data/blog";
 
@@ -9,8 +19,8 @@ const blog = defineCollection({
   schema: ({ image }) =>
     z.object({
       author: z.string().default(SITE.author),
-      pubDatetime: z.date(),
-      modDatetime: z.date().optional().nullable(),
+      pubDatetime: datetimeInSiteTimezone,
+      modDatetime: datetimeInSiteTimezone.optional().nullable(),
       title: z.string(),
       featured: z.boolean().optional(),
       draft: z.boolean().optional(),
