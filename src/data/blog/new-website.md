@@ -19,7 +19,6 @@ Then I decided it'd be a lot easier to just use a real SSG with a nice theme.
 
 I'm sure I'll customize things more in the future. But for now, this is pretty off-the-shelf, and I've never been happier with my website.
 
-
 [1]: https://web.archive.org/web/20240424105921/https://tylerkindy.com/
 [2]: https://web.archive.org/web/20250824153954/https://tylerkindy.com/blog/
 [3]: https://github.com/tkindy/website/commit/6a05305dc77d4b20c174a69baeae87b07bf3adc6
