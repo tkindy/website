@@ -15,6 +15,7 @@ export const SITE = {
     text: "",
     url: "",
   },
+  ogImage: "",
   dynamicOgImage: true,
   dir: "ltr",
   lang: "en",
