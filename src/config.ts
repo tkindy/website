@@ -4,7 +4,6 @@ export const SITE = {
   profile: "https://tylerkindy.com/",
   desc: "Tyler Kindy's personal website and blog.",
   title: "Tyler Kindy",
-  ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
   postPerPage: 4,
