@@ -9,17 +9,11 @@ In preparation for starting this blog, I decided to clean up my website a bit. T
 
 If you're unfamiliar with flexbox, MDN has [a great tutorial series on it][1]. At its core, it's a CSS mechanism for flexibly laying out elements in one dimension (either horizontally or vertically). [My site's homepage][2] now uses flexbox to display my picture and the accompanying text side-by-side in a responsive way.
 
-<figure>
-  <img src="/assets/images/flexbox-homepage.png" alt="current homepage" />
-  <figcaption>Homepage built with flexbox</figcaption>
-</figure>
+![Homepage built with flexbox](../../assets/images/flexbox-homepage.png)
 
 This worked great when I viewed it on my laptop. But after I'd published my changes, I checked it out on my phone, and the image was huge.
 
-<figure>
-  <img src="/assets/images/flexbox-large-image.jpg" alt="supersized me" />
-  <figcaption>Supersized me</figcaption>
-</figure>
+![Supersized me](../../assets/images/flexbox-large-image.jpg)
 
 For whatever reason, this behavior didn't show up in Firefox's mobile emulator. I was confused because I had the following CSS rule:
 
@@ -33,10 +27,7 @@ This should mean that the image starts at 300px by default and can shrink if the
 
 Unfortunately, I still haven't been able to figure out what's happening here. As a workaround, I included a `max-width` constraint on the image of the same size as the `flex-basis`. That seems to have properly clamped the size on mobile.
 
-<figure>
-  <img src="/assets/images/flexbox-normal-image.jpg" alt="regular-sized me" />
-  <figcaption>Regular-sized me</figcaption>
-</figure>
+![Regular-sized me](../../assets/images/flexbox-normal-image.jpg)
 
 [1]: https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/flexbox
 [2]: https://tylerkindy.com

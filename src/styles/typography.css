@@ -43,8 +43,12 @@
       @apply border-border;
     }
 
+    figure {
+      @apply mx-auto max-w-md;
+    }
+
     img {
-      @apply mx-auto max-w-md border border-border;
+      @apply mx-auto border border-border;
     }
 
     figcaption {

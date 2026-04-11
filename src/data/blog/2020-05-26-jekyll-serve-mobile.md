@@ -23,10 +23,7 @@ This returned several addresses; the loopback address (`localhost`, `127.0.0.1`)
 
 Anyways, I took the WiFi IPv4 address while the Jekyll server was running and tried connecting to that from my phone.
 
-<figure>
-  <img src="/assets/images/jekyll-connection-refused.png" alt="connection refused" />
-  <figcaption>Connection refused</figcaption>
-</figure>
+![Connection refused](../../assets/images/jekyll-connection-refused.png)
 
 The connection was refused. I was thinking that maybe I needed to open the port on my laptop's firewall. I run Ubuntu, and after some searching, I found the command to do so:
 
@@ -55,10 +52,7 @@ Options:
 
 I searched online and found [this Stack Overflow answer][3] which said to use `0.0.0.0` for the host parameter to let Jekyll bind to all IP addresses, not just `localhost`. I added that option, tried again from my phone, and...
 
-<figure>
-  <img src="/assets/images/jekyll-connection-success.jpg" alt="success!" />
-  <figcaption>Success!</figcaption>
-</figure>
+![Success!](../../assets/images/jekyll-connection-success.jpg)
 
 ... it worked! Now, I could try out different solutions or changes and see both how they look on desktop and mobile without having to screw with my public site. This was super useful in testing out fixes for my mobile flexbox issue.
 
