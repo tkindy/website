@@ -25,7 +25,9 @@ export function getPath(
 
   // Making sure `id` does not contain the directory
   const blogId = id.split("/");
-  const slug = blogId.length > 0 ? blogId.slice(-1) : blogId;
+  const slug = (blogId.length > 0 ? blogId.slice(-1) : blogId).map(s =>
+    s.replace(/^\d{4}-\d{2}-\d{2}-/, "")
+  );
 
   // If not inside the sub-dir, simply return the file path
   if (!pathSegments || pathSegments.length < 1) {
