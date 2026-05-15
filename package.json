@@ -19,7 +19,7 @@
     "@microflash/remark-figure-caption": "^2.0.2",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.3.0",
-    "astro": "^5.18.1",
+    "astro": "^6.0.0",
     "dayjs": "^1.11.20",
     "lodash.kebabcase": "^4.1.1",
     "remark-collapse": "^0.1.2",
