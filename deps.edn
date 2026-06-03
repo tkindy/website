@@ -1,1 +1,2 @@
-{:deps {babashka/fs {:mvn/version "0.5.33"}}}
+{:deps {babashka/fs {:mvn/version "0.5.33"}
+        hiccup/hiccup {:mvn/version "2.0.0"}}}
