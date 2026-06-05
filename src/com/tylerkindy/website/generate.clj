@@ -1,4 +1,4 @@
-(ns com.tylerkindy.website.main
+(ns com.tylerkindy.website.generate
   (:require [babashka.fs :as fs]
             [com.tylerkindy.website.css :as css]
             [com.tylerkindy.website.paths :refer [assets-dir out-dir]]
@@ -18,7 +18,7 @@
 (defn home []
   (page [:p "Here's some content"]))
 
-(defn -main []
+(defn generate [_]
   (fs/create-dirs out-dir)
   (->> (fs/glob out-dir "*")
        (map fs/delete-tree)
