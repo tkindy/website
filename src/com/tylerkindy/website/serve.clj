@@ -30,7 +30,12 @@
                file)}
       {:status 404})))
 
-(defn serve [_]
+(defn start-server []
   (let [server (run-server app {:legacy-return-value? false})]
     (println "Listening on port" (server-port server))
-    (server-join server)))
+    server))
+
+(comment (start-server))
+
+(defn serve [_]
+  (server-join (start-server)))
