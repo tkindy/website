@@ -20,7 +20,7 @@
 
 (defn generate [_]
   (fs/create-dirs out-dir)
-  (->> (fs/glob out-dir "*")
+  (->> (fs/list-dir out-dir)
        (map fs/delete-tree)
        doall)
   (let [files {"index.html" (home)
