@@ -14,14 +14,16 @@
     (get ext-content-types extension "text/plain")))
 
 (defn app [{:keys [uri]}]
-  (println "Looking up" uri)
   (let [file-path (if (str/ends-with? uri "/")
                     (str uri "index.html")
                     uri)
         file-path (str/replace file-path #"^/" "")
         file (if (str/starts-with? file-path "assets/")
                (fs/file assets-dir (str/replace file-path #"^assets/" ""))
-               (files file-path))]
+               (let [file (files file-path)]
+                 (if (var? file)
+                   (file)
+                   file)))]
     (if file
       {:status 200
        :headers {"Content-Type" (pick-content-type file-path)}
@@ -31,7 +33,7 @@
       {:status 404})))
 
 (defn start-server []
-  (let [server (run-server app {:legacy-return-value? false})]
+  (let [server (run-server #'app {:legacy-return-value? false})]
     (println "Listening on port" (server-port server))
     server))
 

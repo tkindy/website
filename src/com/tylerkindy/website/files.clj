@@ -17,5 +17,5 @@
   (page [:p "Here's some content"]))
 
 (def files
-  {"index.html" home
-   "css/main.css" css/main})
+  {"index.html" #'home
+   "css/main.css" #'css/main})
