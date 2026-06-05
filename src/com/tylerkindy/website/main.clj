@@ -4,7 +4,7 @@
             [com.tylerkindy.website.paths :refer [assets-dir out-dir]]
             [hiccup.page :refer [html5]]))
 
-(defn layout [content]
+(defn page [content]
   (html5 [:head
           [:link {:rel :stylesheet
                   :href "/css/main.css"}]]
@@ -16,7 +16,7 @@
            [:main content]]]))
 
 (defn home []
-  (layout [:p "Here's some content"]))
+  (page [:p "Here's some content"]))
 
 (defn -main []
   (fs/create-dirs out-dir)
