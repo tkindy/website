@@ -1,4 +1,6 @@
 {:deps {babashka/fs {:mvn/version "0.5.33"}
         com.lambdaisland/garden {:mvn/version "1.9.606"}
         hiccup/hiccup {:mvn/version "2.0.0"}}
- :aliases {:generate {:exec-fn com.tylerkindy.website.generate/generate}}}
+ :aliases {:generate {:exec-fn com.tylerkindy.website.generate/generate}
+           :serve {:exec-fn com.tylerkindy.website.serve/serve
+                   :extra-deps {http-kit/http-kit {:mvn/version "2.8.1"}}}}}
