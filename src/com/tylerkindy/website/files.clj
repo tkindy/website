@@ -105,5 +105,3 @@
                 (map (fn [[slug generator]]
                        [slug (:content (generator))]))
                 (into {})))))
-
-(comment (((build-files) "flexbox-ios.html")))
