@@ -46,6 +46,8 @@
                 (str/join "\n")
                 str/trim)}))
 
+(comment (parse-markdown (slurp "data/blog/2020-05-25-flexbox-ios.md")))
+
 (defn extract-slug [path]
   (let [name (fs/file-name path)
         [_ slug] (re-matches #"\d{4}-\d{2}-\d{2}-([\w-]+)\.md" name)]
@@ -59,6 +61,8 @@
      :body (list [:h1 title]
                  (md-to-html-string body
                                     :reference-links? true))}))
+
+(comment (build-post "data/blog/2020-05-25-flexbox-ios.md"))
 
 (def posts
   (->> (fs/list-dir (fs/path data-dir "blog"))
