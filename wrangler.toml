@@ -1,0 +1,5 @@
+name = "tylerkindy-com"
+compatibility_date = "2026-06-05"
+
+[assets]
+directory = "./out"
