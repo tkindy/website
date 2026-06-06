@@ -64,7 +64,7 @@
 
 (comment (build-post "data/blog/2020-05-25-flexbox-ios.md"))
 
-(def posts
+(defn build-posts []
   (->> (fs/list-dir (fs/path data-dir "blog"))
        (map (fn [path]
               [(str (extract-slug path) ".html")
@@ -73,7 +73,7 @@
                    (page {:title (str title " | Tyler Kindy")} body)))]))
        (into {})))
 
-(defn blog []
+(defn blog [posts]
   (page {:title "Blog | Tyler Kindy"}
         [:div
          [:p "This is my blog"]
@@ -81,10 +81,11 @@
           (for [slug (keys posts)]
             [:li [:a {:href (str "/" slug)} slug]])]]))
 
-(def non-posts
-  {"index.html" #'home
-   "blog.html" #'blog
-   "css/main.css" #'css/main})
+(defn build-files []
+  (let [posts (build-posts)]
+    (merge {"index.html" home
+            "blog.html" (fn [] (blog posts))
+            "css/main.css" css/main}
+           posts)))
 
-(def files
-  (merge non-posts posts))
+(comment (((build-files) "flexbox-ios.html")))

@@ -1,6 +1,6 @@
 (ns com.tylerkindy.website.generate
   (:require [babashka.fs :as fs]
-            [com.tylerkindy.website.files :refer [files]]
+            [com.tylerkindy.website.files :refer [build-files]]
             [com.tylerkindy.website.paths :refer [assets-dir out-dir]]))
 
 (defn generate [_]
@@ -8,7 +8,7 @@
   (->> (fs/list-dir out-dir)
        (map fs/delete-tree)
        doall)
-  (doall (for [[path content] files]
+  (doall (for [[path content] (build-files)]
            (do
              (some->> path
                       fs/parent

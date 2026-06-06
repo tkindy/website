@@ -1,7 +1,7 @@
 (ns com.tylerkindy.website.serve
   (:require [babashka.fs :as fs]
             [clojure.string :as str]
-            [com.tylerkindy.website.files :refer [files]]
+            [com.tylerkindy.website.files :refer [build-files]]
             [com.tylerkindy.website.paths :refer [assets-dir]]
             [org.httpkit.server :refer [run-server server-port server-join]]))
 
@@ -24,7 +24,7 @@
         file-path (str/replace file-path #"^/" "")
         file (if (str/starts-with? file-path "assets/")
                (fs/file assets-dir (str/replace file-path #"^assets/" ""))
-               (let [file (files file-path)]
+               (let [file ((build-files) file-path)]
                  (if (var? file)
                    (file)
                    file)))]
