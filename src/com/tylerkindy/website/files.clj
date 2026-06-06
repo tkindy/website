@@ -57,15 +57,16 @@
 (defn build-post [path]
   (let [markdown (slurp (str path))
         {:keys [front-matter body]} (parse-markdown markdown)
-        {pub-datetime :pubDatetime, :keys [title]} front-matter]
+        {pub-datetime :pubDatetime, :keys [title]} front-matter
+        published (-> pub-datetime
+                      .toInstant
+                      (jt/local-date "UTC")
+                      .atStartOfDay
+                      (.atZone (java.time.ZoneId/of "America/New_York")))]
     {:title title
+     :published published
      :body (list [:h1 title]
-                 [:i (jt/format "MMM d, yyyy"
-                                (-> pub-datetime
-                                    .toInstant
-                                    (jt/local-date "UTC")
-                                    .atStartOfDay
-                                    (.atZone (java.time.ZoneId/of "America/New_York"))))]
+                 [:i (jt/format "MMM d, yyyy" published)]
                  (md-to-html-string body
                                     :reference-links? true))}))
 
@@ -76,8 +77,10 @@
        (map (fn [path]
               [(str (extract-slug path) ".html")
                (fn []
-                 (let [{:keys [title body]} (build-post path)]
-                   (page {:title (str title " | Tyler Kindy")} body)))]))
+                 (let [{:keys [title published body]} (build-post path)]
+                   {:title title
+                    :published published
+                    :content (page {:title (str title " | Tyler Kindy")} body)}))]))
        (into {})))
 
 (defn blog [posts]
@@ -85,14 +88,22 @@
         [:div
          [:p "This is my blog"]
          [:ul
-          (for [slug (keys posts)]
-            [:li [:a {:href (str "/" slug)} slug]])]]))
+          (->> posts
+               (map (fn [[slug generator]]
+                      [slug (generator)]))
+               (sort-by (fn [[_ {:keys [published]}]] published)
+                        #(.isAfter %1 %2))
+               (map (fn [[slug _]]
+                      [:li [:a {:href (str "/" slug)} slug]])))]]))
 
 (defn build-files []
   (let [posts (build-posts)]
     (merge {"index.html" home
             "blog.html" (fn [] (blog posts))
             "css/main.css" css/main}
-           posts)))
+           (->> posts
+                (map (fn [[slug generator]]
+                       [slug (:content (generator))]))
+                (into {})))))
 
 (comment (((build-files) "flexbox-ios.html")))
