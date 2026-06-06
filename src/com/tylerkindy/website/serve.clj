@@ -9,14 +9,18 @@
   {"html" "text/html"
    "css" "text/css"})
 
-(defn pick-content-type [path]
+(defn extract-extension [path]
   (let [[_ extension] (re-find #"\.(\w+)$" path)]
-    (get ext-content-types extension "text/plain")))
+    extension))
+
+(defn pick-content-type [path]
+  (get ext-content-types (extract-extension path) "text/plain"))
 
 (defn app [{:keys [uri]}]
-  (let [file-path (if (str/ends-with? uri "/")
-                    (str uri "index.html")
-                    uri)
+  (let [file-path (cond
+                    (str/ends-with? uri "/") (str uri "index.html")
+                    (nil? (extract-extension uri)) (str uri ".html")
+                    :else uri)
         file-path (str/replace file-path #"^/" "")
         file (if (str/starts-with? file-path "assets/")
                (fs/file assets-dir (str/replace file-path #"^assets/" ""))

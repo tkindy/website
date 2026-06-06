@@ -16,6 +16,10 @@
 (defn home []
   (page [:p "Here's some content"]))
 
+(defn blog []
+  (page [:p "This is my blog"]))
+
 (def files
   {"index.html" #'home
+   "blog.html" #'blog
    "css/main.css" #'css/main})
