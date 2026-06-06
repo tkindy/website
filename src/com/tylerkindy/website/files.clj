@@ -6,7 +6,8 @@
             [clojure.string :as str]
             [clojure.core.match :refer [match]]
             [markdown.core :refer [md-to-html-string]]
-            [clj-yaml.core :as yaml]))
+            [clj-yaml.core :as yaml]
+            [java-time.api :as jt]))
 
 (defn page [metadata content]
   (let [{:keys [title]} metadata]
@@ -56,9 +57,15 @@
 (defn build-post [path]
   (let [markdown (slurp (str path))
         {:keys [front-matter body]} (parse-markdown markdown)
-        {:keys [title]} front-matter]
+        {pub-datetime :pubDatetime, :keys [title]} front-matter]
     {:title title
      :body (list [:h1 title]
+                 [:i (jt/format "MMM d, yyyy"
+                                (-> pub-datetime
+                                    .toInstant
+                                    (jt/local-date "UTC")
+                                    .atStartOfDay
+                                    (.atZone (java.time.ZoneId/of "America/New_York"))))]
                  (md-to-html-string body
                                     :reference-links? true))}))
 
