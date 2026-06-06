@@ -1,6 +1,6 @@
 (ns com.tylerkindy.website.files
   (:require [com.tylerkindy.website.css :as css]
-            [com.tylerkindy.website.paths :refer [data-dir]]
+            [com.tylerkindy.website.paths :refer [posts-dir]]
             [hiccup.page :refer [html5]]
             [babashka.fs :as fs]
             [clojure.string :as str]
@@ -25,8 +25,13 @@
 (defn home []
   (page {:title "Tyler Kindy"} [:p "Here's some content"]))
 
-(defn parse-markdown [markdown]
-  (let [lines (str/split-lines markdown)
+(defn extract-slug [path]
+  (let [name (fs/file-name path)
+        [_ slug] (re-matches #"\d{4}-\d{2}-\d{2}-([\w-]+)\.md" name)]
+    slug))
+
+(defn read-post [path]
+  (let [lines (fs/read-all-lines path)
         [_ _ fm-lines body-lines]
         (reduce
          (fn [[fm-started fm-finished fm-lines body-lines] line]
@@ -41,67 +46,80 @@
          lines)]
     {:front-matter (->> fm-lines
                         (str/join "\n")
-                        str/trim
-                        yaml/parse-string)
+                        str/trim)
      :body (->> body-lines
                 (str/join "\n")
                 str/trim)}))
 
-(comment (parse-markdown (slurp "data/blog/2020-05-25-flexbox-ios.md")))
+(defn read-post-data [path]
+  (let [{:keys [front-matter body]} (read-post path)]
+    {:metadata (as-> front-matter $
+                 (yaml/parse-string $)
+                 (assoc $ :slug (extract-slug path))
+                 (assoc $ :published (-> (:pubDatetime $)
+                                         .toInstant
+                                         (jt/local-date "UTC")
+                                         .atStartOfDay
+                                         (.atZone (java.time.ZoneId/of "America/New_York"))))
+                 (dissoc $ :pubDatetime))
+     :body (md-to-html-string body
+                              :reference-links? true)}))
 
-(defn extract-slug [path]
-  (let [name (fs/file-name path)
-        [_ slug] (re-matches #"\d{4}-\d{2}-\d{2}-([\w-]+)\.md" name)]
-    slug))
+(defonce cached-post-data (atom nil))
 
-(defn build-post [path]
-  (let [markdown (slurp (str path))
-        {:keys [front-matter body]} (parse-markdown markdown)
-        {pub-datetime :pubDatetime, :keys [title]} front-matter
-        published (-> pub-datetime
-                      .toInstant
-                      (jt/local-date "UTC")
-                      .atStartOfDay
-                      (.atZone (java.time.ZoneId/of "America/New_York")))]
-    {:title title
-     :published published
-     :body (list [:h1 title]
-                 [:i (jt/format "MMM d, yyyy" published)]
-                 (md-to-html-string body
-                                    :reference-links? true))}))
+(defn post-data []
+  (let [paths (fs/list-dir posts-dir)
+        all-data @cached-post-data
+        all-data
+        (->> paths
+             (map (fn [path]
+                    (let [last-modified (-> path
+                                            fs/last-modified-time
+                                            fs/file-time->instant)
+                          data (get all-data path)
+                          data (if (= last-modified (:last-modified data))
+                                 data
+                                 (read-post-data path))]
+                      [path (assoc data :last-modified last-modified)])))
+             (into {}))]
+    (reset! cached-post-data all-data)
+    all-data))
 
-(comment (build-post "data/blog/2020-05-25-flexbox-ios.md"))
+(comment (post-data))
 
 (defn build-posts []
-  (->> (fs/list-dir (fs/path data-dir "blog"))
-       (map (fn [path]
-              [(str (extract-slug path) ".html")
-               (fn []
-                 (let [{:keys [title published body]} (build-post path)]
-                   {:title title
-                    :published published
-                    :content (page {:title (str title " | Tyler Kindy")} body)}))]))
-       (into {})))
+  (->> (post-data)
+       vals
+       (map (fn [{:keys [metadata body]}]
+              (let [{:keys [slug title published]} metadata]
+                [(str slug ".html")
+                 (-> metadata
+                     (assoc :content
+                            (page {:title (str title " | Tyler Kindy")}
+                                  (list [:h1 title]
+                                        [:i (jt/format "MMM d, yyyy" published)]
+                                        body)))
+                     (dissoc :body))])))))
 
-(defn blog [posts]
+(comment (build-posts))
+
+(defn blog []
   (page {:title "Blog | Tyler Kindy"}
         [:div
          [:p "This is my blog"]
          [:ul
-          (->> posts
-               (map (fn [[slug generator]]
-                      [slug (generator)]))
-               (sort-by (fn [[_ {:keys [published]}]] published)
-                        #(.isAfter %1 %2))
-               (map (fn [[slug _]]
+          (->> (post-data)
+               vals
+               (sort-by (comp :published :metadata) #(.isAfter %1 %2))
+               (map (fn [{{:keys [slug]} :metadata}]
                       [:li [:a {:href (str "/" slug)} slug]])))]]))
 
 (defn build-files []
   (let [posts (build-posts)]
     (merge {"index.html" home
-            "blog.html" (fn [] (blog posts))
+            "blog.html" blog
             "css/main.css" css/main}
            (->> posts
-                (map (fn [[slug generator]]
-                       [slug (:content (generator))]))
+                (map (fn [[slug data]]
+                       [slug (:content data)]))
                 (into {})))))

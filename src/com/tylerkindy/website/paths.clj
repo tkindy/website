@@ -17,4 +17,5 @@
                               *file*)))
 (def assets-dir (fs/path repo-root "assets"))
 (def data-dir (fs/path repo-root "data"))
+(def posts-dir (fs/path data-dir "blog"))
 (def out-dir (fs/path repo-root "out"))
