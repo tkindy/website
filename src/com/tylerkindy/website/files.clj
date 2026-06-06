@@ -8,19 +8,21 @@
             [markdown.core :refer [md-to-html-string]]
             [clj-yaml.core :as yaml]))
 
-(defn page [& content]
-  (html5 [:head
-          [:link {:rel :stylesheet
-                  :href "/css/main.css"}]]
-         [:body
-          [:div
-           [:nav
-            [:a {:href "/"} "Tyler Kindy"]
-            [:a {:href "/blog"} "Blog"]]
-           [:main content]]]))
+(defn page [metadata content]
+  (let [{:keys [title]} metadata]
+    (html5 [:head
+            [:title title]
+            [:link {:rel :stylesheet
+                    :href "/css/main.css"}]]
+           [:body
+            [:div
+             [:nav
+              [:a {:href "/"} "Tyler Kindy"]
+              [:a {:href "/blog"} "Blog"]]
+             [:main content]]])))
 
 (defn home []
-  (page [:p "Here's some content"]))
+  (page {:title "Tyler Kindy"} [:p "Here's some content"]))
 
 (defn parse-markdown [markdown]
   (let [lines (str/split-lines markdown)
@@ -51,8 +53,10 @@
 
 (defn build-post [path]
   (let [markdown (slurp (str path))
-        {:keys [front-matter body]} (parse-markdown markdown)]
-    {:body (list [:h1 (:title front-matter)]
+        {:keys [front-matter body]} (parse-markdown markdown)
+        {:keys [title]} front-matter]
+    {:title title
+     :body (list [:h1 title]
                  (md-to-html-string body
                                     :reference-links? true))}))
 
@@ -61,11 +65,13 @@
        (map (fn [path]
               [(str (extract-slug path) ".html")
                (fn []
-                 (page (:body (build-post path))))]))
+                 (let [{:keys [title body]} (build-post path)]
+                   (page {:title (str title " | Tyler Kindy")} body)))]))
        (into {})))
 
 (defn blog []
-  (page [:div
+  (page {:title "Blog | Tyler Kindy"}
+        [:div
          [:p "This is my blog"]
          [:ul
           (for [slug (keys posts)]
