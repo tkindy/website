@@ -83,7 +83,7 @@
 
 (defn blog []
   (page {:title "Blog | Tyler Kindy"}
-        [:div
+        (list
          [:p "This is my blog"]
          [:ul
           (->> (post-data)
