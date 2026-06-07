@@ -1,26 +1,13 @@
 (ns com.tylerkindy.website.files
   (:require [com.tylerkindy.website.css :as css]
+            [com.tylerkindy.website.html :refer [page]]
             [com.tylerkindy.website.paths :refer [posts-dir]]
-            [hiccup.page :refer [html5]]
             [babashka.fs :as fs]
             [clojure.string :as str]
             [clojure.core.match :refer [match]]
             [markdown.core :refer [md-to-html-string]]
             [clj-yaml.core :as yaml]
             [java-time.api :as jt]))
-
-(defn page [metadata content]
-  (let [{:keys [title]} metadata]
-    (html5 [:head
-            [:title title]
-            [:link {:rel :stylesheet
-                    :href "/css/main.css"}]]
-           [:body
-            [:div
-             [:nav
-              [:a {:href "/"} "Tyler Kindy"]
-              [:a {:href "/blog"} "Blog"]]
-             [:main content]]])))
 
 (defn home []
   (page {:title "Tyler Kindy"} [:p "Here's some content"]))
