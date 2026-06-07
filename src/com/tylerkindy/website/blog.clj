@@ -84,7 +84,7 @@
 (defn blog []
   (page {:title "Blog | Tyler Kindy"}
         (list
-         [:p "This is my blog"]
+         [:p "Recent posts"]
          [:ul
           (->> (post-data)
                vals
