@@ -45,6 +45,9 @@
 
 (defonce cached-post-data (atom nil))
 
+(comment @cached-post-data)
+(comment (reset! cached-post-data nil))
+
 (defn post-data []
   (let [paths (fs/list-dir posts-dir)
         all-data @cached-post-data
@@ -70,7 +73,7 @@
        vals
        (map (fn [{:keys [metadata body]}]
               (let [{:keys [slug title published]} metadata]
-                [(str slug ".html")
+                [(str "posts/" slug ".html")
                  (-> metadata
                      (assoc :content
                             (page {:title (str title " | Tyler Kindy")}
@@ -92,6 +95,6 @@
                           [published rank])
                         (comp - compare))
                (map (fn [{{:keys [slug title published]} :metadata}]
-                      [:li [:a {:href (str "/" slug)} title]
+                      [:li [:a {:href (str "posts/" slug)} title]
                        " "
                        [:i (jt/format "MMM d, yyyy" published)]])))])))
