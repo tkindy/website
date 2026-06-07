@@ -11,5 +11,5 @@
             [:div
              [:nav
               [:a {:href "/"} "Tyler Kindy"]
-              [:a {:href "/blog"} "Blog"]]
+              [:a {:href "/about"} "About"]]
              [:main content]]])))
