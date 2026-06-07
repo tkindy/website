@@ -91,5 +91,7 @@
                (sort-by (fn [{{:keys [published rank]} :metadata}]
                           [published rank])
                         (comp - compare))
-               (map (fn [{{:keys [slug]} :metadata}]
-                      [:li [:a {:href (str "/" slug)} slug]])))]]))
+               (map (fn [{{:keys [slug title published]} :metadata}]
+                      [:li [:a {:href (str "/" slug)} title]
+                       " "
+                       [:i (jt/format "MMM d, yyyy" published)]])))])))
