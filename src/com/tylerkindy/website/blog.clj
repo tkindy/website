@@ -10,8 +10,9 @@
 
 (defn extract-path-metadata [path]
   (let [name (fs/file-name path)
-        [_ date slug] (re-matches #"(\d{4}-\d{2}-\d{2})-([\w-]+)\.md" name)]
+        [_ date rank slug] (re-matches #"(\d{4}-\d{2}-\d{2})([a-z])?-([\w-]+)\.md" name)]
     {:published (jt/local-date date)
+     :rank rank
      :slug slug}))
 
 (defn read-post [path]
@@ -87,6 +88,8 @@
          [:ul
           (->> (post-data)
                vals
-               (sort-by (comp :published :metadata) #(.isAfter %1 %2))
+               (sort-by (fn [{{:keys [published rank]} :metadata}]
+                          [published rank])
+                        (comp - compare))
                (map (fn [{{:keys [slug]} :metadata}]
                       [:li [:a {:href (str "/" slug)} slug]])))]]))
