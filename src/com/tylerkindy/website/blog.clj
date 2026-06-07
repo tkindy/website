@@ -8,10 +8,11 @@
             [java-time.api :as jt]
             [markdown.core :refer [md-to-html-string]]))
 
-(defn extract-slug [path]
+(defn extract-path-metadata [path]
   (let [name (fs/file-name path)
-        [_ slug] (re-matches #"\d{4}-\d{2}-\d{2}-([\w-]+)\.md" name)]
-    slug))
+        [_ date slug] (re-matches #"(\d{4}-\d{2}-\d{2})-([\w-]+)\.md" name)]
+    {:published (jt/local-date date)
+     :slug slug}))
 
 (defn read-post [path]
   (let [lines (fs/read-all-lines path)
@@ -36,15 +37,8 @@
 
 (defn read-post-data [path]
   (let [{:keys [front-matter body]} (read-post path)]
-    {:metadata (as-> front-matter $
-                 (yaml/parse-string $)
-                 (assoc $ :slug (extract-slug path))
-                 (assoc $ :published (-> (:pubDatetime $)
-                                         .toInstant
-                                         (jt/local-date "UTC")
-                                         .atStartOfDay
-                                         (.atZone (java.time.ZoneId/of "America/New_York"))))
-                 (dissoc $ :pubDatetime))
+    {:metadata (merge (extract-path-metadata path)
+                      (yaml/parse-string front-matter))
      :body (md-to-html-string body
                               :reference-links? true)}))
 

@@ -1,7 +1,6 @@
 ---
 title: "New website"
 description: "Maybe now I'll actually blog."
-pubDatetime: 2026-04-05
 tags: ["website", "blog"]
 ---
 

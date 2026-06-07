@@ -1,6 +1,5 @@
 ---
 title: "Trouble with flexbox on iOS"
-pubDatetime: 2020-05-25
 description: "Debugging a flexbox layout issue on iOS Safari where images exceeded their flex-basis constraint."
 tags: ["css", "flexbox", "ios"]
 ---

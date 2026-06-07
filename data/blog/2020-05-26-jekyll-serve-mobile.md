@@ -1,6 +1,5 @@
 ---
 title: "Testing a Jekyll site on mobile during development"
-pubDatetime: 2020-05-26
 description: "How to connect to a local Jekyll development server from a mobile device on the same network."
 tags: ["jekyll", "mobile", "networking"]
 ---
