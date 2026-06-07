@@ -5,4 +5,6 @@
 (defn main []
   (css (at-font-face {:font-family "Fira Code"
                       :src "url(\"/assets/fonts/fira-code.ttf\") format(\"truetype\")"})
-       [:body {:font-family "Fira Code"}]))
+       [:body {:font-family "Fira Code"}]
+       ["nav *" {:margin-right "1rem"}
+        ["&:last-child" {:margin-right 0}]]))
